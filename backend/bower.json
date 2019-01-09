@@ -1,0 +1,26 @@
+{
+  "name": "testeRobson",
+  "version": "0.0.0",
+  "authors": [
+    "Robson Emilio Langkammer"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "homepage": "no",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "jquery": "^3.1.1",
+    "angular": "^1.6.3",
+    "angular-bootstrap": "^2.5.0",
+    "bootstrap": "^4.2.1"
+  }
+}
