@@ -15,6 +15,9 @@
     <!-- endbower -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/summernote.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/chosen.min.css') }}" rel="stylesheet">
+
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -85,7 +88,10 @@
         @yield('content')
     </div>
     <!-- Scripts -->
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src='{{ asset('js/jquery.min.js') }}'></script>
     <script type="text/javascript" src='{{ asset('js/app.js') }}'></script>
+    <script type="text/javascript" src='{{ asset('js/summernote.min.js') }}'></script>
+    <script type="text/javascript" src='{{ asset('js/chosen.jquery.min.js') }}'></script>
+
 </body>
 </html>

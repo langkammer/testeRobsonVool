@@ -16,7 +16,7 @@ class CreateEmailModelosTable extends Migration
         Schema::create('email_modelos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('assunto');
-            $table->string('corpo');
+            $table->longText('corpo');
             $table->timestamps();
         });
     }

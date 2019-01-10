@@ -9,10 +9,98 @@ angular.module('testeRobsonVool',
 
 
 }])
-.controller('ModelController', ['$scope',function($scope) {
+.controller('ModelController', ['$scope','$http',function($scope,$http) {
 
-    console.log("ModelController ");
 
+    $scope.filaEmail = [];
+
+    var modelo = {};
+
+    var fila = {};
+
+    $scope.mudar = function(){
+        if(_.find( $scope.filaEmail,{ id :  $scope.email.id})){
+            console.log("mesm email");
+        }
+        else{
+            fila = {
+                id : $scope.email.id,
+                nome : $scope.email.nome,
+                email : $scope.email.email,
+                idModelo : modelo.id
+            }
+            $scope.filaEmail.push(fila);
+
+        }
+    }
+
+    $scope.remove = function(email){
+        if(_.find( $scope.filaEmail,{ id :  email.id}))
+            _.remove($scope.filaEmail, { id :  email.id})
+    }
+
+
+    $scope.enviar = function(){
+        if($scope.filaEmail <= 0)
+            alert("Não existe nenhum email selecionado");
+        else{
+            $http.post('enviarJson', $scope.filaEmail).success(
+            function(response){
+                console.log("enviado!",response);
+
+            }).error(function(error){
+                console.log(error);
+                console.log("debugMe!");
+            })
+        
+            
+        }    
+    }
+
+    $scope.inicializaModeloMsg = function(idModelo){
+        console.log("MODELO",idModelo);
+        $http.get('/modelo/json/modelo/' + idModelo).then(function (data) {
+            if(data.data.mensagem == "ok"){
+                modelo= data.data.data.data;
+            }
+        }, function (err) {
+            console.log(err);
+        });
+
+    }
+    $scope.emails = [];
+    
+
+
+    function inicializaEmailJson(){
+        setTimeout(function(){
+			$("#emails").chosen();
+        },5);
+        
+        $http.get('/modelo/json/emails').then(function (data) {
+            if(data.data.mensagem == "ok"){
+               console.log(data.data.data.data)
+               $scope.emails = data.data.data.data;
+               setTimeout(function(){
+                $('#emails').trigger('chosen:updated');
+
+                 },5);
+
+            }
+    
+        }, function (err) {
+            console.log(err);
+        });
+    }
+
+    function inicializaComponentsJs(){
+        $(document).ready(function() {
+            $('#corpoId').summernote();
+        });
+    }
+
+    inicializaComponentsJs();
+    inicializaEmailJson();
 }])
 .config(function($interpolateProvider) {
 

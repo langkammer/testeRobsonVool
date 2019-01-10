@@ -1,4 +1,11 @@
 {
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/css/summernote.css": "/css/summernote.css",
+    "/css/font/summernote.ttf": "/css/font/summernote.ttf",
+    "/css/font/summernote.woff": "/css/font/summernote.woff",
+    "/js/summernote.min.js": "/js/summernote.min.js",
     "/js/jquery.min.js": "/js/jquery.min.js",
-    "/css/app.css": "/css/app.css"
+    "/css/chosen.min.css": "/css/chosen.min.css",
+    "/js/chosen.jquery.min.js": "/js/chosen.jquery.min.js"
 }

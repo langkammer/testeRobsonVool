@@ -9,7 +9,9 @@
     </div>
     <div class="form-group col-md-12">
         {!! Form::label('textEnviado', 'Msg Html Enviada: ') !!}
-        {!! Form::textarea('corpo', $modelo->corpo, ['class' => 'form-control']) !!}
+        {!! Form::textarea('corpo', $modelo->corpo, [
+                            'id'      => 'corpoId'
+        ], ['class' => 'form-control']) !!}
     </div>
     <div class="form-group col-md-12">
         {!! Form::submit($salvar, ['class' => 'btn btn-primary']) !!}

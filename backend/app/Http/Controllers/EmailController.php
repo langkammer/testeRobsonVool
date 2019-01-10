@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jobs\EmailFila;
+use Illuminate\Support\Facades\Log;
+use App\Fila;
 
 class EmailController extends Controller
 {
@@ -11,74 +14,36 @@ class EmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function enviar(Request $request)
     {
         //
+        try {
+            Log::info('
+             Fila de Email acionara um Jobs de
+             envio de emails contruido para escalar aplicação...');
+                        
+            for ($i = 0; $i < count($request->all()); $i++) {
+                Log::info("EMPURRANDO PARA FILA " . $request->all()[$i]['nome']);      
+                $fila = new Fila;
+                $fila->email = $request->all()[$i]['email'];
+                $fila->idModelo = $request->all()[$i]['idModelo'];
+                $fila->status = 'PENDENTE';
+                $fila->save(); 
+            }
+            
+            EmailFila::dispatch()->onQueue('fila_emails');;
+
+            return ['mensagem' => "ok"];
+
+          }
+
+        catch (\Exception $e) {
+            Log::info($e);      
+
+            return ['mensagem' => "erro"]; 
+        }
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
