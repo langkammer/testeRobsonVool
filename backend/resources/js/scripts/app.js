@@ -42,11 +42,15 @@ angular.module('testeRobsonVool',
 
     $scope.enviar = function(){
         if($scope.filaEmail <= 0)
-            alert("Não existe nenhum email selecionado");
+            alert("Não existe nenhum email selecionado ");
         else{
-            $http.post('enviarJson', $scope.filaEmail).success(
+            $http.post('enviarJson', $scope.filaEmail).then(
             function(response){
-                console.log("enviado!",response);
+                if(response.data.mensagem == "ok") {
+                    alert("Emails foram marcados para envio enquanto isso vc pode continuar a usar o sistema");
+                    $(location).attr('href', '../../modelo');
+                }
+
 
             }).error(function(error){
                 console.log(error);

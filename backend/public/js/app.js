@@ -63936,9 +63936,12 @@ angular.module('testeRobsonVool', ['ui.bootstrap']).controller('EmailController'
   };
 
   $scope.enviar = function () {
-    if ($scope.filaEmail <= 0) alert("Não existe nenhum email selecionado");else {
-      $http.post('enviarJson', $scope.filaEmail).success(function (response) {
-        console.log("enviado!", response);
+    if ($scope.filaEmail <= 0) alert("Não existe nenhum email selecionado ");else {
+      $http.post('enviarJson', $scope.filaEmail).then(function (response) {
+        if (response.data.mensagem == "ok") {
+          alert("Emails foram marcados para envio enquanto isso vc pode continuar a usar o sistema");
+          $(location).attr('href', '../../modelo');
+        }
       }).error(function (error) {
         console.log(error);
         console.log("debugMe!");
@@ -63998,9 +64001,9 @@ angular.module('testeRobsonVool', ['ui.bootstrap']).controller('EmailController'
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/robson/projetos/testeRobsonVool/backend/resources/assets/js/app.js */"./resources/assets/js/app.js");
-__webpack_require__(/*! /home/robson/projetos/testeRobsonVool/backend/resources/js/scripts/app.js */"./resources/js/scripts/app.js");
-module.exports = __webpack_require__(/*! /home/robson/projetos/testeRobsonVool/backend/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! /Users/ludmila/projetos/testeRobsonVool/backend/resources/assets/js/app.js */"./resources/assets/js/app.js");
+__webpack_require__(/*! /Users/ludmila/projetos/testeRobsonVool/backend/resources/js/scripts/app.js */"./resources/js/scripts/app.js");
+module.exports = __webpack_require__(/*! /Users/ludmila/projetos/testeRobsonVool/backend/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })

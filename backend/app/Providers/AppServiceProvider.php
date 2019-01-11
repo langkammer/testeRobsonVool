@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+use App\Observers\FilaObserver;
+use App\Fila;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Schema::defaultStringLength(191);
+        Fila::observe(FilaObserver::class);
     }
 
     /**

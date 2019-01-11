@@ -9,6 +9,7 @@ class Fila extends Model
     //
     protected $fillable = [
         'email',
+        'idModelo',
         'status'
 
     ];

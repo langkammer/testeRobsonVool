@@ -4,7 +4,9 @@ namespace App\Jobs;
 
 use App\Fila;
 use App\EmailModelo;
+use App\Email;
 use App\Mail\SendMailModelo;
+use Mail;  
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -23,9 +25,15 @@ class EmailFila implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+
+    private $fila;
+
+
+    public function __construct(Fila $fila)
     {
         //
+        $this->fila = $fila;
+
 
     }
 
@@ -36,24 +44,24 @@ class EmailFila implements ShouldQueue
      */
     public function handle()
     {
-        //
-        /*$filas = DB::table('filas')
-            ->where('status', '=', 'PENDENTE')
-            ->get();
-       */
 
-        $filas = Fila::where('status','=','PENDENTE')->get();
-        foreach($filas as $fila) {
 
-            Mail::to($fila->email)
-                    ->send(new SendMailModelo());
 
-            $filaEnviada = Fila::find($fila->id);
-            $filaEnviada->status = 'ENVIADO';
-            $filaEnviada->save();
-        }
-       
+        $email =  Email::where('email','=',$this->fila->email)->first();
 
+        $modelo =  EmailModelo::find($this->fila->idModelo);
+    
+        Log::info('enviado email ... ' );      
+
+        Mail::to($this->fila->email)
+            ->send(new SendMailModelo($email,$modelo));
+
+        Log::info('Email enviado para ' . $email->nome);      
+
+
+        $filaEnviada = Fila::find($this->fila->id);
+        $filaEnviada->status = 'ENVIADO';
+        $filaEnviada->save();
 
 
     }

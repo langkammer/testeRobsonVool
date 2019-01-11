@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\EmailFila;
+use App\Email;
 use Illuminate\Http\Request;
 use App\Http\Requests\EmailRequest;
 
@@ -20,7 +20,7 @@ class EmailFilaController extends Controller
 
     public function index()
     {
-        $emails = EmailFila::all();
+        $emails = Email::all();
 
         return view('email.index', compact('emails'));
     }
@@ -32,7 +32,7 @@ class EmailFilaController extends Controller
      */
     public function create()
     {
-        $email = new EmailFila;
+        $email = new Email;
 
         return view('email.create', compact('email'));
 
@@ -46,9 +46,9 @@ class EmailFilaController extends Controller
      */
     public function store(EmailRequest $request)
     {
-        $email = new EmailFila();
+        $email = new Email();
 
-        $modeloRequest = EmailFila::create($request->all());
+        $modeloRequest = Email::create($request->all());
 
         session()->flash('flash_message', 'Email cadastrado com Sucesso!');
 
@@ -58,10 +58,10 @@ class EmailFilaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\EmailFila  $email
+     * @param  \App\Email  $email
      * @return \Illuminate\Http\Response
      */
-    public function show(EmailFila $email)
+    public function show(Email $email)
     {
         //
         return view('email.show', compact('email'));
@@ -74,7 +74,7 @@ class EmailFilaController extends Controller
      * @param  \App\email  $email
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmailFila $email)
+    public function edit(Email $email)
     {
         //
         return view('email.edit', compact('email'));
@@ -85,10 +85,10 @@ class EmailFilaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EmailFila  $email
+     * @param  \App\Email  $email
      * @return \Illuminate\Http\Response
      */
-    public function update(EmailRequest $request, EmailFila $email)
+    public function update(EmailRequest $request, Email $email)
     {
         //
         $email->update($request->all());
@@ -101,10 +101,10 @@ class EmailFilaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EmailFila  $email
+     * @param  \App\Email  $email
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmailFila $email)
+    public function destroy(Email $email)
     {
         //
         $deleted = $email->delete();
@@ -113,7 +113,7 @@ class EmailFilaController extends Controller
         return redirect('email');
     }
 
-    public function deleteConfirm(EmailFila $email)
+    public function deleteConfirm(Email $email)
     {
         return view('email.confirmDelete', compact('email'));
     }

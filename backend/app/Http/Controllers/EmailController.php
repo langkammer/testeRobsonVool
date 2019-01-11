@@ -31,8 +31,6 @@ class EmailController extends Controller
                 $fila->save(); 
             }
             
-            EmailFila::dispatch()->onQueue('fila_emails');;
-
             return ['mensagem' => "ok"];
 
           }

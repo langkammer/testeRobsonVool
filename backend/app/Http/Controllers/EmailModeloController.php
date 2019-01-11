@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\EmailModelo;
 use Illuminate\Http\Request;
 use App\Http\Requests\ModeloRequest;
-use App\EmailFila;
+use App\Email;
 
 class EmailModeloController extends Controller
 {
@@ -30,7 +30,7 @@ class EmailModeloController extends Controller
     public function enviar(EmailModelo $modelo)
     {
         //
-        $emails = EmailFila::pluck('nome', 'id')->all();
+        $emails = Email::pluck('nome', 'id')->all();
 
         return view('modelo.envia', compact('modelo'));
 
@@ -38,7 +38,7 @@ class EmailModeloController extends Controller
 
     public function getEmails(){
 
-        $emails = EmailFila::all();
+        $emails = Email::all();
 
 
         if($emails!=null)
