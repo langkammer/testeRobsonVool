@@ -4,7 +4,7 @@
     <div class="container">
     @include('shared.alert')
     <h1>Modelos </h1>
-    {!! link_to_route('modelo.create', 'Nova Conta', null, [
+    {!! link_to_route('modelo.create', 'Nova Modelo', null, [
         'class' => 'btn btn-primary btn-lg',
         'data-remote' => 'true' ]) !!}
         <p></p>

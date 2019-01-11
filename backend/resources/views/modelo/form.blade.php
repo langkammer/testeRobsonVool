@@ -1,7 +1,7 @@
 @include('shared.alert')
 <div class="container" ng-controller="ModelController">
     <div class="form-group col-md-12">
-        <h1>Dados da Conta</h1>
+        <h1>Dados do Modelo</h1>
     </div>
     <div class="form-group col-md-12">
         {!! Form::label('assunto', 'Nome Assunto:') !!}
